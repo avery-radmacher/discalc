@@ -1,3 +1,7 @@
+mod core;
+mod options;
+mod reader;
+
 fn main() {
     // reader/csv | read file from program args
     // reader     | read into internal format
