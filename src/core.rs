@@ -2,7 +2,10 @@ use crate::options::Options;
 use chrono::NaiveDate;
 
 pub struct Round {
-    // round info
+    pub date: NaiveDate,
+    pub round_number: u32,
+    pub holes: u32,
+    pub rating: u32,
 }
 
 pub fn calculate_rating(rounds: Vec<Round>, options: Options, date: Option<NaiveDate>) -> u32 {
