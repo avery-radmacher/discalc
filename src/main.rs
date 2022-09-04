@@ -1,10 +1,11 @@
 fn main() {
-    //  read file from program args into internal format
-    //  then for each combination of options:
-    //      for each valid date in the format:
-    //          calculate rating
-    //          calculate error from projected
-    //      aggregate errors
-    //  order combinations by least error
-    //  display results
+    // reader/csv | read file from program args
+    // reader     | read into internal format
+    // options    | then for each combination of options:
+    // self       |     for each valid date in the format:
+    // self/core  |         calculate rating
+    // self       |         calculate error from projected
+    // self       |     aggregate errors
+    // self       | order combinations by least error
+    // self       | display results
 }
