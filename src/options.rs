@@ -27,3 +27,7 @@ pub enum BadRoundExclusionStandardDeviation {
     Population,
     Sample,
 }
+
+pub fn get_all_options() -> Vec<Options> {
+    todo!()
+}
