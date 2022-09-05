@@ -28,6 +28,52 @@ pub enum BadRoundExclusionStandardDeviation {
     Sample,
 }
 
+trait ValuesIter {
+    fn iter_values() -> Vec<Self>
+    where
+        Self: Sized;
+}
+
+impl ValuesIter for RoundingMode {
+    fn iter_values() -> Vec<Self>
+    where
+        Self: Sized,
+    {
+        use RoundingMode::*;
+        vec![Floor, Ceiling, MidpointUp, MidpointToEven]
+    }
+}
+
+impl ValuesIter for SameDayRoundOrdering {
+    fn iter_values() -> Vec<Self>
+    where
+        Self: Sized,
+    {
+        use SameDayRoundOrdering::*;
+        vec![Chronological, Reversed]
+    }
+}
+
+impl ValuesIter for BadRoundExclusionAverage {
+    fn iter_values() -> Vec<Self>
+    where
+        Self: Sized,
+    {
+        use BadRoundExclusionAverage::*;
+        vec![Even, Weighted]
+    }
+}
+
+impl ValuesIter for BadRoundExclusionStandardDeviation {
+    fn iter_values() -> Vec<Self>
+    where
+        Self: Sized,
+    {
+        use BadRoundExclusionStandardDeviation::*;
+        vec![Population, Sample]
+    }
+}
+
 pub fn get_all_options() -> Vec<Options> {
     todo!()
 }
