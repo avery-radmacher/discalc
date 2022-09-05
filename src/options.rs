@@ -6,6 +6,7 @@ pub struct Options {
     pub final_average_rounding_mode: RoundingMode,
 }
 
+#[derive(Clone, Copy)]
 pub enum RoundingMode {
     Floor,
     Ceiling,
@@ -13,16 +14,19 @@ pub enum RoundingMode {
     MidpointToEven,
 }
 
+#[derive(Clone, Copy)]
 pub enum SameDayRoundOrdering {
     Chronological,
     Reversed,
 }
 
+#[derive(Clone, Copy)]
 pub enum BadRoundExclusionAverage {
     Weighted,
     Even,
 }
 
+#[derive(Clone, Copy)]
 pub enum BadRoundExclusionStandardDeviation {
     Population,
     Sample,
@@ -75,5 +79,25 @@ impl ValuesIter for BadRoundExclusionStandardDeviation {
 }
 
 pub fn get_all_options() -> Vec<Options> {
-    todo!()
+    let mut ret = Vec::with_capacity(128);
+    for rounds_to_double_weight_rounding_mode in RoundingMode::iter_values() {
+        for same_day_round_ordering in SameDayRoundOrdering::iter_values() {
+            for bad_round_exclusion_average in BadRoundExclusionAverage::iter_values() {
+                for bad_round_exclusion_standard_deviation in
+                    BadRoundExclusionStandardDeviation::iter_values()
+                {
+                    for final_average_rounding_mode in RoundingMode::iter_values() {
+                        ret.push(Options {
+                            bad_round_exclusion_average,
+                            bad_round_exclusion_standard_deviation,
+                            final_average_rounding_mode,
+                            rounds_to_double_weight_rounding_mode,
+                            same_day_round_ordering,
+                        });
+                    }
+                }
+            }
+        }
+    }
+    ret
 }
