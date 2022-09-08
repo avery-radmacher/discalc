@@ -1,6 +1,7 @@
 use crate::options::Options;
 use chrono::NaiveDate;
 
+#[derive(Clone, Copy)]
 pub struct Round {
     pub date: NaiveDate,
     pub round_number: u32,
