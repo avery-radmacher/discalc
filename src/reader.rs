@@ -2,6 +2,7 @@ use crate::core::Round;
 use chrono::NaiveDate;
 use serde::Deserialize;
 
+#[derive(Debug)]
 pub enum Error {
     CsvError,
     DataError,
