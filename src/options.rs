@@ -1,4 +1,6 @@
-#[derive(Clone, Copy)]
+use serde::Serialize;
+
+#[derive(Clone, Copy, Serialize)]
 pub struct Options {
     pub rounds_to_double_weight_rounding_mode: RoundingMode,
     pub same_day_round_ordering: SameDayRoundOrdering,
@@ -7,7 +9,7 @@ pub struct Options {
     pub final_average_rounding_mode: RoundingMode,
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Serialize)]
 pub enum RoundingMode {
     Floor,
     Ceiling,
@@ -15,19 +17,19 @@ pub enum RoundingMode {
     MidpointToEven,
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Serialize)]
 pub enum SameDayRoundOrdering {
     Chronological,
     Reversed,
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Serialize)]
 pub enum BadRoundExclusionAverage {
     Weighted,
     Even,
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Serialize)]
 pub enum BadRoundExclusionStandardDeviation {
     Population,
     Sample,

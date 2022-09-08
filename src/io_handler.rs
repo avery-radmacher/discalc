@@ -1,6 +1,7 @@
-use crate::core::Round;
+use crate::core::{OptionsWithError, Round};
+use crate::options::Options;
 use chrono::NaiveDate;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug)]
 pub enum Error {
@@ -46,4 +47,25 @@ fn to_data(result: Result<Record, csv::Error>) -> Result<(Round, Option<(NaiveDa
     };
     let dated_rating = record.player_rating.map(|rating| (date, rating));
     Ok((round, dated_rating))
+}
+
+#[derive(Serialize)]
+struct OutRecord {
+    options: Options,
+    error: f64,
+}
+
+pub fn write<W>(writer: W, data: Vec<OptionsWithError>) -> Result<(), Error>
+where
+    W: std::io::Write,
+{
+    let records = data
+        .iter()
+        .map(|&OptionsWithError { options, error }| OutRecord { options, error })
+        .collect::<Vec<_>>();
+    let mut writer = csv::Writer::from_writer(writer);
+    for record in records {
+        writer.serialize(record).or(Err(CsvError))?;
+    }
+    Ok(())
 }

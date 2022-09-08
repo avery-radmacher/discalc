@@ -20,3 +20,8 @@ pub fn calculate_rating_on(rounds: Vec<Round>, options: Options, date: NaiveDate
 pub fn calculate_rating_latest(rounds: Vec<Round>, options: Options) -> u32 {
     calculate_rating(rounds, options, None)
 }
+
+pub struct OptionsWithError {
+    pub options: Options,
+    pub error: f64,
+}
