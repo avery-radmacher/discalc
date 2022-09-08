@@ -4,17 +4,15 @@ use serde::Deserialize;
 
 pub enum Error {
     CsvError,
-    IoError,
     DataError,
 }
-use std::path::Path;
 use Error::*;
 
-pub fn read<P>(path: P) -> Result<(Vec<Round>, Vec<(NaiveDate, u32)>), Error>
+pub fn read<R>(reader: R) -> Result<(Vec<Round>, Vec<(NaiveDate, u32)>), Error>
 where
-    P: AsRef<Path>,
+    R: std::io::Read,
 {
-    let mut reader = csv::Reader::from_path(path).or(Err(IoError))?;
+    let mut reader = csv::Reader::from_reader(reader);
     let records = reader
         .deserialize()
         .map(to_data)
