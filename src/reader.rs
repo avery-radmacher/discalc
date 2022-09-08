@@ -7,9 +7,13 @@ pub enum Error {
     IoError,
     DataError,
 }
+use std::path::Path;
 use Error::*;
 
-pub fn read(path: &str) -> Result<(Vec<Round>, Vec<(NaiveDate, u32)>), Error> {
+pub fn read<P>(path: P) -> Result<(Vec<Round>, Vec<(NaiveDate, u32)>), Error>
+where
+    P: AsRef<Path>,
+{
     let mut reader = csv::Reader::from_path(path).or(Err(IoError))?;
     let records = reader
         .deserialize()
