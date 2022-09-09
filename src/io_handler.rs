@@ -2,6 +2,7 @@ use crate::core::{OptionsWithError, Round};
 use crate::options::Options;
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
 
 #[derive(Debug)]
 pub enum Error {
@@ -23,6 +24,8 @@ where
     let dated_ratings = dated_ratings
         .into_iter()
         .filter_map(|i| i)
+        .collect::<HashSet<_>>()
+        .into_iter()
         .collect::<Vec<_>>();
     Ok((rounds, dated_ratings))
 }
