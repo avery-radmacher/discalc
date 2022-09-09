@@ -1,6 +1,6 @@
 use serde::Serialize;
 
-#[derive(Clone, Copy, Serialize)]
+#[derive(Clone, Copy)]
 pub struct Options {
     pub rounds_to_double_weight_rounding_mode: RoundingMode,
     pub same_day_round_ordering: SameDayRoundOrdering,
