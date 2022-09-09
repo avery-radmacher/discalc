@@ -38,7 +38,7 @@ struct Record {
 
 fn to_data(result: Result<Record, csv::Error>) -> Result<(Round, Option<(NaiveDate, u32)>), Error> {
     let record: Record = result.or(Err(CsvError))?;
-    let date = NaiveDate::parse_from_str(&record.date, "%Y-%m-%d").or(Err(DataError))?;
+    let date = NaiveDate::parse_from_str(&record.date, "%v").or(Err(DataError))?;
     let round = Round {
         date,
         holes: record.holes,
