@@ -23,7 +23,7 @@ where
     let (rounds, dated_ratings): (Vec<_>, Vec<_>) = records.into_iter().unzip();
     let dated_ratings = dated_ratings
         .into_iter()
-        .filter_map(|i| i)
+        .flatten()
         .collect::<HashSet<_>>()
         .into_iter()
         .collect::<Vec<_>>();
